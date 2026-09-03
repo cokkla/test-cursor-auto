@@ -1,0 +1,4 @@
+{
+  "name": "test-cursor-auto",
+  "install": "pip install --user -r requirements.txt"
+}
