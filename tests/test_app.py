@@ -4,4 +4,5 @@ from app import add
 
 
 def test_add():
+    # 1 + 2 应为 3
     assert add(1, 2) == 3
