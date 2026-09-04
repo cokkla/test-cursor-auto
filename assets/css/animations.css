@@ -1,0 +1,15 @@
+/* ==========================================================
+ * animations.css —— 关键帧动画与滚动进场（模块 7 填充）
+ * ========================================================== */
+
+/* 尊重用户的“减少动效”偏好：全局兜底关闭动画与平滑滚动 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

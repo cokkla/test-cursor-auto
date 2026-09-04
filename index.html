@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI 工程师 · 个人主页</title>
+  <meta name="description" content="一位 AI 工程师的个人主页：大模型应用、机器学习与工程落地。" />
+  <meta name="theme-color" content="#FDFBF8" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#211D22" media="(prefers-color-scheme: dark)" />
+
+  <!-- 防 FOUC：在渲染前同步确定主题，避免刷新时先闪一下亮色再切暗色 -->
+  <script>
+    (function () {
+      try {
+        var stored = localStorage.getItem("site-theme");
+        var prefersDark =
+          window.matchMedia &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches;
+        var theme =
+          stored === "light" || stored === "dark"
+            ? stored
+            : prefersDark
+            ? "dark"
+            : "light";
+        document.documentElement.setAttribute("data-theme", theme);
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "light");
+      }
+    })();
+  </script>
+
+  <link rel="stylesheet" href="assets/css/variables.css" />
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <link rel="stylesheet" href="assets/css/animations.css" />
+</head>
+<body>
+  <!-- 吸顶导航（模块 3 填充结构） -->
+  <header class="site-nav" id="nav">
+    <div class="site-nav__inner container">
+      <a class="site-nav__logo" href="#hero" aria-label="返回顶部">AI</a>
+      <nav class="site-nav__links" aria-label="主导航">
+        <a href="#about">关于我</a>
+        <a href="#skills">专业技能</a>
+        <a href="#projects">作品集</a>
+        <a href="#timeline">经历</a>
+        <a href="#contact">联系我</a>
+      </nav>
+      <button
+        class="site-nav__theme"
+        type="button"
+        data-theme-toggle
+        aria-label="切换到暗色主题"
+      >
+        <span class="site-nav__theme-icon" data-theme-icon aria-hidden="true"></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- 首屏 Hero（模块 5 / 7 填充） -->
+    <section id="hero" class="section section--hero">
+      <div class="container hero__inner">
+        <div class="hero__text" data-hero-text></div>
+        <div class="hero__visual" data-hero-visual></div>
+      </div>
+    </section>
+
+    <!-- 关于我（模块 4 渲染） -->
+    <section id="about" class="section">
+      <div class="container">
+        <div class="section__head">
+          <p class="section__eyebrow">ABOUT ME</p>
+          <h2 class="section__title">关于我</h2>
+          <span class="section__rule" aria-hidden="true"></span>
+        </div>
+        <div class="about__inner" data-about></div>
+      </div>
+    </section>
+
+    <!-- 专业技能（模块 4 渲染） -->
+    <section id="skills" class="section section--alt">
+      <div class="container">
+        <div class="section__head">
+          <p class="section__eyebrow">SKILLS</p>
+          <h2 class="section__title">专业技能</h2>
+          <span class="section__rule" aria-hidden="true"></span>
+        </div>
+        <div class="skills__grid" data-skills></div>
+      </div>
+    </section>
+
+    <!-- 作品集（模块 5 渲染） -->
+    <section id="projects" class="section">
+      <div class="container">
+        <div class="section__head">
+          <p class="section__eyebrow">PROJECTS</p>
+          <h2 class="section__title">作品集</h2>
+          <span class="section__rule" aria-hidden="true"></span>
+        </div>
+        <div class="projects__filters" data-project-filters></div>
+        <div class="projects__grid" data-projects></div>
+      </div>
+    </section>
+
+    <!-- 经历时间线（模块 6 渲染） -->
+    <section id="timeline" class="section section--alt">
+      <div class="container">
+        <div class="section__head">
+          <p class="section__eyebrow">EXPERIENCE</p>
+          <h2 class="section__title">经历</h2>
+          <span class="section__rule" aria-hidden="true"></span>
+        </div>
+        <div class="timeline" data-timeline></div>
+      </div>
+    </section>
+
+    <!-- 联系我（模块 6 渲染） -->
+    <section id="contact" class="section">
+      <div class="container">
+        <div class="section__head">
+          <p class="section__eyebrow">CONTACT</p>
+          <h2 class="section__title">联系我</h2>
+          <span class="section__rule" aria-hidden="true"></span>
+        </div>
+        <div class="contact__inner" data-contact></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container site-footer__inner" data-footer></div>
+  </footer>
+
+  <!-- 脚本按依赖顺序引入（传统 script，支持 file:// 双击预览） -->
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/icons.js"></script>
+  <script src="assets/js/theme.js"></script>
+  <script src="assets/js/render.js"></script>
+  <script src="assets/js/character.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
