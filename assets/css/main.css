@@ -523,6 +523,128 @@ button {
 }
 
 /* ==========================================================
+ * 响应式（桌面优先 + max-width 媒体查询）
+ * ========================================================== */
+
+/* --- 平板：≤1024px --- */
+@media (max-width: 1024px) {
+  :root {
+    --space-section: 64px;
+  }
+
+  .projects__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .skills__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .avatar {
+    max-width: 288px; /* 缩至 80% */
+  }
+}
+
+/* --- 手机：≤768px --- */
+@media (max-width: 768px) {
+  .hero__inner {
+    grid-template-columns: 1fr;
+    min-height: auto;
+    gap: var(--space-7);
+    text-align: center;
+  }
+
+  .hero__text {
+    order: 1;
+  }
+
+  .hero__visual {
+    order: 2;
+  }
+
+  .hero__cta,
+  .hero__social {
+    justify-content: center;
+  }
+
+  .hero__tagline {
+    margin-inline: auto;
+  }
+
+  .about__inner {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+
+  .projects__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact__cards {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* 导航锚点收进汉堡菜单，展开为全屏覆盖层 */
+  .site-nav__burger {
+    display: inline-flex;
+  }
+
+  .site-nav__links {
+    position: fixed;
+    inset: 72px 0 0 0;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-6);
+    background-color: var(--color-bg);
+    transform: translateX(100%);
+    transition: transform var(--duration-normal) var(--ease);
+    z-index: var(--z-overlay);
+  }
+
+  .site-nav.is-menu-open .site-nav__links {
+    transform: none;
+  }
+
+  .site-nav__links a {
+    font-size: var(--fs-h3);
+  }
+}
+
+/* --- 小屏手机：≤480px --- */
+@media (max-width: 480px) {
+  .container {
+    padding-inline: var(--space-4);
+  }
+
+  .about__info {
+    grid-template-columns: 1fr;
+  }
+
+  /* 隐藏纯装饰性元素，减少视觉噪音 */
+  .hero__blob,
+  .hero__scroll,
+  .hero__bubble {
+    display: none;
+  }
+
+  /* 按钮改为全宽 */
+  .hero__cta {
+    flex-direction: column;
+  }
+
+  .hero__cta .btn {
+    width: 100%;
+  }
+
+  .contact-card {
+    width: 100%;
+    max-width: 320px;
+  }
+}
+
+/* ==========================================================
  * 关于我
  * ========================================================== */
 .about__inner {
