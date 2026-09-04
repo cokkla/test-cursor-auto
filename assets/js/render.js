@@ -43,6 +43,21 @@
     return dict[name] || "";
   }
 
+  /** 标签裁剪：最多展示 max 个，其余折叠为 +N */
+  function clampTags(tags, max) {
+    var limit = max || 5;
+    var list = Array.isArray(tags) ? tags.filter(hasValue) : [];
+    return {
+      shown: list.slice(0, limit),
+      extra: Math.max(0, list.length - limit),
+    };
+  }
+
+  /** 分类匹配：all 命中全部，否则要求分类相等 */
+  function matchesCategory(cardCategory, selected) {
+    return selected === "all" || cardCategory === selected;
+  }
+
   /* ---------------- DOM 渲染：Hero + 关于我 ---------------- */
 
   function renderProfile() {
@@ -262,16 +277,151 @@
     }
   }
 
+  /* ---------------- DOM 渲染：作品集 ---------------- */
+
+  function renderProjects() {
+    renderProjectFilters();
+    renderProjectCards();
+  }
+
+  function renderProjectFilters() {
+    var host = document.querySelector("[data-project-filters]");
+    if (
+      !host ||
+      typeof projectCategories === "undefined" ||
+      !projectCategories.length
+    ) {
+      return;
+    }
+
+    host.innerHTML = projectCategories
+      .map(function (cat, idx) {
+        var active = idx === 0; // 默认选中「全部」
+        return (
+          '<button type="button" class="filter-btn' +
+          (active ? " is-active" : "") +
+          '" data-filter="' +
+          escapeHtml(cat.value) +
+          '" aria-pressed="' +
+          (active ? "true" : "false") +
+          '">' +
+          escapeHtml(cat.label) +
+          "</button>"
+        );
+      })
+      .join("");
+  }
+
+  function renderProjectCards() {
+    var host = document.querySelector("[data-projects]");
+    if (!host || typeof projects === "undefined") return;
+
+    host.innerHTML = projects
+      .map(function (p) {
+        // 封面：有图用 img，无图用「主色→薄荷绿」渐变 + 项目名首字兜底
+        var cover;
+        if (hasValue(p.cover)) {
+          cover =
+            '<img class="project-card__cover-img" src="' +
+            escapeHtml(p.cover) +
+            '" alt="' +
+            escapeHtml(p.title) +
+            '" loading="lazy" decoding="async" width="1600" height="900" />';
+        } else {
+          var initial = hasValue(p.title) ? p.title.trim().charAt(0) : "·";
+          cover =
+            '<span class="project-card__cover-fallback" aria-hidden="true">' +
+            escapeHtml(initial) +
+            "</span>";
+        }
+
+        // 量化亮点为必填项，缺失时给出控制台警告并占位
+        if (!hasValue(p.highlight)) {
+          if (global.console && console.warn) {
+            console.warn("[projects] 项目 " + p.id + " 缺少必填的量化亮点 highlight");
+          }
+        }
+        var highlight = hasValue(p.highlight)
+          ? '<p class="project-card__highlight">' +
+            escapeHtml(p.highlight) +
+            "</p>"
+          : "";
+
+        // 标签：最多 5 个，超出显示 +N
+        var clamped = clampTags(p.tags, 5);
+        var tags =
+          '<ul class="project-card__tags">' +
+          clamped.shown
+            .map(function (t) {
+              return '<li class="project-card__tag">' + escapeHtml(t) + "</li>";
+            })
+            .join("") +
+          (clamped.extra > 0
+            ? '<li class="project-card__tag project-card__tag--more">+' +
+              clamped.extra +
+              "</li>"
+            : "") +
+          "</ul>";
+
+        // 底部链接：为空则隐藏对应按钮，而不是渲染死链
+        var links = "";
+        if (hasValue(p.repo)) {
+          links +=
+            '<a class="project-card__link" href="' +
+            escapeHtml(p.repo) +
+            '" target="_blank" rel="noopener noreferrer">' +
+            icon("github") +
+            "<span>GitHub 仓库</span></a>";
+        }
+        if (hasValue(p.demo)) {
+          links +=
+            '<a class="project-card__link" href="' +
+            escapeHtml(p.demo) +
+            '" target="_blank" rel="noopener noreferrer">' +
+            icon("externalLink") +
+            "<span>在线 Demo</span></a>";
+        }
+        var linksHtml = links
+          ? '<div class="project-card__links">' + links + "</div>"
+          : "";
+
+        return (
+          '<article class="project-card" data-category="' +
+          escapeHtml(p.category) +
+          '">' +
+          '<div class="project-card__cover">' +
+          cover +
+          "</div>" +
+          '<div class="project-card__body">' +
+          '<h3 class="project-card__title">' +
+          escapeHtml(p.title) +
+          "</h3>" +
+          '<p class="project-card__summary">' +
+          escapeHtml(p.summary) +
+          "</p>" +
+          highlight +
+          tags +
+          linksHtml +
+          "</div>" +
+          "</article>"
+        );
+      })
+      .join("");
+  }
+
   /* ---------------- 导出 ---------------- */
 
   global.renderProfile = renderProfile;
   global.renderSkills = renderSkills;
+  global.renderProjects = renderProjects;
 
   // 纯工具函数挂命名空间，供其它模块与测试引用
   global.RenderUtils = {
     hasValue: hasValue,
     escapeHtml: escapeHtml,
     skillDots: skillDots,
+    clampTags: clampTags,
+    matchesCategory: matchesCategory,
   };
 
   if (typeof module !== "undefined" && module.exports) {
