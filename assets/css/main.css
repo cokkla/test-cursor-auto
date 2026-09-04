@@ -200,3 +200,358 @@ button {
   width: 100%;
   height: 100%;
 }
+
+/* ==========================================================
+ * 通用组件：按钮 / 标签
+ * ========================================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: 44px; /* 移动端触摸目标 ≥44px */
+  padding: var(--space-3) var(--space-5);
+  border: 1px solid transparent;
+  border-radius: var(--radius-full);
+  font-size: var(--fs-sm);
+  font-weight: var(--font-weight-medium);
+  transition: background-color var(--duration-fast) var(--ease),
+    color var(--duration-fast) var(--ease),
+    border-color var(--duration-fast) var(--ease),
+    transform var(--duration-fast) var(--ease);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn--primary {
+  background-color: var(--color-primary);
+  color: var(--color-text-inverse);
+}
+
+.btn--primary:hover {
+  background-color: var(--color-primary-hover);
+}
+
+.btn--ghost {
+  background-color: transparent;
+  border-color: var(--color-border);
+  color: var(--color-text);
+}
+
+.btn--ghost:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary-ink);
+}
+
+.btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-full);
+  background-color: var(--color-primary-soft);
+  color: var(--color-primary-ink);
+  font-size: var(--fs-xs);
+  font-family: var(--font-mono);
+  list-style: none;
+}
+
+/* ==========================================================
+ * Hero
+ * ========================================================== */
+.section--hero {
+  padding-block: var(--space-8);
+}
+
+.hero__inner {
+  display: grid;
+  grid-template-columns: 55% 45%;
+  align-items: center;
+  gap: var(--space-6);
+  min-height: calc(100vh - 72px);
+}
+
+.hero__greeting {
+  display: inline-block;
+  margin-bottom: var(--space-4);
+  padding: var(--space-1) var(--space-4);
+  border-radius: var(--radius-full);
+  background-color: var(--color-primary-soft);
+  color: var(--color-primary-ink);
+  font-size: var(--fs-sm);
+}
+
+.hero__name {
+  margin-bottom: var(--space-3);
+  font-size: var(--fs-hero);
+}
+
+.hero__english {
+  display: block;
+  margin-top: var(--space-2);
+  font-size: var(--fs-h3);
+  font-weight: var(--font-weight-normal);
+  color: var(--color-text-muted);
+}
+
+.hero__role {
+  margin-bottom: var(--space-4);
+  font-family: var(--font-heading);
+  font-size: var(--fs-h2);
+  font-weight: var(--font-weight-bold);
+}
+
+.hero__role-mark {
+  position: relative;
+  display: inline-block;
+}
+
+/* 关键词下划线装饰：用伪元素画一条粗圆角底纹，而非 text-decoration */
+.hero__role-mark::after {
+  content: "";
+  position: absolute;
+  left: -2px;
+  right: -2px;
+  bottom: 2px;
+  height: 8px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-primary-soft);
+  z-index: -1;
+}
+
+.hero__tagline {
+  max-width: 42ch;
+  margin-bottom: var(--space-6);
+  color: var(--color-text-muted);
+}
+
+.hero__cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-bottom: var(--space-6);
+}
+
+.hero__social {
+  display: flex;
+  gap: var(--space-3);
+}
+
+.hero__social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  color: var(--color-text-muted);
+  transition: color var(--duration-fast) var(--ease),
+    border-color var(--duration-fast) var(--ease),
+    transform var(--duration-fast) var(--ease);
+}
+
+.hero__social-link:hover {
+  color: var(--color-primary-ink);
+  border-color: var(--color-primary);
+  transform: translateY(-2px);
+}
+
+.hero__social-link svg {
+  width: 20px;
+  height: 20px;
+}
+
+.hero__visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ==========================================================
+ * 关于我
+ * ========================================================== */
+.about__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-7);
+  align-items: start;
+}
+
+.about__bio {
+  color: var(--color-text);
+}
+
+.about__keywords {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: var(--space-5) 0 0;
+  padding: 0;
+}
+
+.about__info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.info-card {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background-color: var(--color-surface);
+  transition: background-color var(--duration-fast) var(--ease),
+    transform var(--duration-fast) var(--ease);
+}
+
+.info-card:hover {
+  background-color: var(--color-surface-hover);
+  transform: translateY(-2px);
+}
+
+.info-card__icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  color: var(--color-primary-ink);
+  transition: transform var(--duration-fast) var(--ease);
+}
+
+.info-card:hover .info-card__icon {
+  transform: scale(1.1);
+}
+
+.info-card__icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.info-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-width: 0;
+}
+
+.info-card__label {
+  font-size: var(--fs-xs);
+  color: var(--color-text-muted);
+}
+
+.info-card__value {
+  font-size: var(--fs-sm);
+  color: var(--color-text);
+  word-break: break-word;
+}
+
+a.info-card__value:hover {
+  color: var(--color-primary-ink);
+}
+
+/* ==========================================================
+ * 专业技能
+ * ========================================================== */
+.skill-legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+  font-size: var(--fs-xs);
+  color: var(--color-text-muted);
+}
+
+.skill-legend__item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.skills__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-5);
+}
+
+.skill-card {
+  padding: var(--space-6);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background-color: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+}
+
+.skill-card__head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-5);
+}
+
+.skill-card__icon {
+  display: inline-flex;
+  width: 26px;
+  height: 26px;
+  color: var(--color-primary-ink);
+}
+
+.skill-card__icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.skill-card__title {
+  font-size: var(--fs-h3);
+}
+
+.skill-card__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.skill-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.skill-item__name {
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+}
+
+.skill-item__dots {
+  display: inline-flex;
+  gap: var(--space-1);
+  flex-shrink: 0;
+}
+
+.skill-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-border);
+}
+
+.skill-dot--on {
+  background-color: var(--color-primary);
+}
