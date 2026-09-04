@@ -15,6 +15,118 @@
   transform: none;
 }
 
+/* ==========================================================
+ * 漫画形象动效
+ * ========================================================== */
+
+/* --- 呼吸浮动：整体轻微上下浮动 --- */
+@keyframes avatar-float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-5px); }
+}
+
+#avatarFloat {
+  animation: avatar-float 4s ease-in-out infinite;
+}
+
+/* --- 挥手：绕肩关节旋转 --- */
+@keyframes avatar-wave {
+  0%, 100% { transform: rotate(0deg); }
+  25%      { transform: rotate(-18deg); }
+  50%      { transform: rotate(-4deg); }
+  75%      { transform: rotate(-18deg); }
+}
+
+#armWave {
+  transform-box: fill-box;
+  transform-origin: 15% 90%; /* 肩关节，按实际绘制的肩部坐标 */
+}
+
+#armWave.is-waving {
+  animation: avatar-wave var(--duration-slow) var(--ease) 2;
+}
+
+/* --- 眨眼：眼睛整组纵向压缩 --- */
+@keyframes avatar-blink {
+  0%, 100% { transform: scaleY(1); }
+  50%      { transform: scaleY(0.08); }
+}
+
+#eyeLeft,
+#eyeRight {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+#eyeLeft.is-blinking,
+#eyeRight.is-blinking {
+  animation: avatar-blink 160ms var(--ease);
+}
+
+/* --- 主题联动装饰：随主题淡入淡出 + 轻微位移旋转 --- */
+#decorSun {
+  opacity: 1;
+  transition: opacity var(--duration-normal) var(--ease),
+    transform var(--duration-normal) var(--ease);
+}
+
+#decorMoon,
+#decorStars {
+  opacity: 0;
+  transition: opacity var(--duration-normal) var(--ease);
+}
+
+html[data-theme="dark"] #decorSun {
+  opacity: 0;
+  transform: translateY(-12px) rotate(45deg);
+}
+
+html[data-theme="dark"] #decorMoon {
+  opacity: 1;
+}
+
+html[data-theme="dark"] #decorStars {
+  opacity: 1;
+}
+
+/* 星星极缓慢闪烁，三颗用不同 delay 错开 */
+@keyframes star-twinkle {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.35; }
+}
+
+html[data-theme="dark"] #decorStars .avatar__star {
+  animation: star-twinkle 3s ease-in-out infinite;
+}
+
+html[data-theme="dark"] #decorStars .avatar__star:nth-child(2) {
+  animation-delay: 1s;
+}
+
+html[data-theme="dark"] #decorStars .avatar__star:nth-child(3) {
+  animation-delay: 2s;
+}
+
+/* 屏幕轻微高光闪动 */
+@keyframes screen-glow {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.7; }
+}
+
+#laptopScreen {
+  animation: screen-glow 3.5s ease-in-out infinite;
+}
+
+/* --- 向下滚动提示箭头缓动 --- */
+@keyframes scroll-bounce {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(2px); }
+}
+
+.hero__scroll-icon {
+  animation: scroll-bounce 1.6s ease-in-out infinite;
+}
+
 /* 尊重用户的“减少动效”偏好：全局兜底关闭动画与平滑滚动 */
 @media (prefers-reduced-motion: reduce) {
   *,

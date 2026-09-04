@@ -293,6 +293,7 @@ button {
 }
 
 .hero__inner {
+  position: relative;
   display: grid;
   grid-template-columns: 55% 45%;
   align-items: center;
@@ -392,9 +393,133 @@ button {
 }
 
 .hero__visual {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+/* 背景模糊色斑（纯装饰） */
+.hero__blob {
+  position: absolute;
+  width: 260px;
+  height: 260px;
+  border-radius: var(--radius-full);
+  filter: blur(80px);
+  opacity: 0.25;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.hero__blob--1 {
+  top: -40px;
+  left: -30px;
+  background-color: var(--color-primary);
+}
+
+.hero__blob--2 {
+  bottom: -40px;
+  right: -20px;
+  background-color: var(--color-accent);
+}
+
+.avatar {
+  width: 100%;
+  max-width: 360px;
+  cursor: pointer;
+  border-radius: var(--radius-xl);
+}
+
+.avatar__svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: visible;
+}
+
+/* 形象所有部件的填充色统一走变量，主题切换时平滑过渡 */
+.avatar__svg * {
+  transition: fill var(--duration-normal) var(--ease);
+}
+
+.avatar__skin { fill: var(--avatar-skin); }
+.avatar__hair { fill: var(--avatar-hair); }
+.avatar__hoodie { fill: var(--avatar-hoodie); }
+.avatar__hoodie-2 { fill: var(--avatar-hoodie-2); }
+.avatar__laptop-base { fill: var(--avatar-laptop); }
+.avatar__screen { fill: var(--avatar-screen); }
+.avatar__blush { fill: var(--avatar-blush); }
+.avatar__eye-white { fill: var(--avatar-eye-white); }
+.avatar__pupil { fill: var(--avatar-line); }
+.avatar__clip { fill: var(--color-highlight); }
+
+.avatar__brow,
+.avatar__mouth {
+  fill: none;
+  stroke: var(--avatar-line);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.avatar__sun {
+  fill: var(--color-highlight);
+}
+
+.avatar__sun-rays line {
+  stroke: var(--color-highlight);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.avatar__moon {
+  fill: var(--color-highlight);
+}
+
+.avatar__star {
+  fill: var(--color-highlight);
+}
+
+/* 代码气泡 */
+.hero__bubble {
+  position: absolute;
+  right: 4%;
+  bottom: 2%;
+  padding: var(--space-2) var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  background-color: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+}
+
+.hero__bubble code {
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  color: var(--color-primary-ink);
+}
+
+/* 向下滚动提示箭头 */
+.hero__scroll {
+  position: absolute;
+  left: 50%;
+  bottom: var(--space-5);
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  color: var(--color-text-muted);
+}
+
+.hero__scroll-icon {
+  display: inline-flex;
+  width: 24px;
+  height: 24px;
+}
+
+.hero__scroll-icon svg {
+  width: 100%;
+  height: 100%;
 }
 
 /* ==========================================================

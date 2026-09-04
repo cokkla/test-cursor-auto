@@ -73,7 +73,140 @@
     <section id="hero" class="section section--hero">
       <div class="container hero__inner">
         <div class="hero__text" data-hero-text></div>
-        <div class="hero__visual" data-hero-visual></div>
+        <div class="hero__visual" data-hero-visual>
+          <span class="hero__blob hero__blob--1" aria-hidden="true"></span>
+          <span class="hero__blob hero__blob--2" aria-hidden="true"></span>
+
+          <div
+            class="avatar"
+            id="avatarWrap"
+            tabindex="0"
+            role="button"
+            aria-label="和站长的卡通形象打招呼"
+          >
+            <svg
+              id="avatar"
+              class="avatar__svg"
+              viewBox="0 0 320 400"
+              role="img"
+              aria-label="站长的卡通形象：一位短发女生坐在笔记本电脑前微笑挥手"
+            >
+              <!-- 主题联动装饰（最底层） -->
+              <g id="avatarDecor" aria-hidden="true">
+                <g id="decorSun">
+                  <circle class="avatar__sun" cx="264" cy="58" r="20" />
+                  <g class="avatar__sun-rays">
+                    <line x1="264" y1="22" x2="264" y2="34" />
+                    <line x1="264" y1="82" x2="264" y2="94" />
+                    <line x1="228" y1="58" x2="240" y2="58" />
+                    <line x1="288" y1="58" x2="300" y2="58" />
+                    <line x1="238" y1="32" x2="247" y2="41" />
+                    <line x1="281" y1="75" x2="290" y2="84" />
+                    <line x1="238" y1="84" x2="247" y2="75" />
+                    <line x1="281" y1="41" x2="290" y2="32" />
+                  </g>
+                </g>
+                <path
+                  id="decorMoon"
+                  class="avatar__moon"
+                  d="M284 58a22 22 0 1 1-24-22 17 17 0 0 0 24 22z"
+                />
+                <g id="decorStars" class="avatar__stars">
+                  <path class="avatar__star" d="M40 60l2.2 5.2L48 67l-5.2 2.2L40 74l-2.2-4.8L32 67l5.8-1.8z" />
+                  <path class="avatar__star" d="M70 30l1.6 3.8L76 35l-4 1.6L70 40l-1.6-3.4L64 35l4.2-1.4z" />
+                  <path class="avatar__star" d="M52 108l1.8 4.2L58 114l-4.2 1.8L52 120l-1.8-4.2L46 114l4.2-1.8z" />
+                </g>
+              </g>
+
+              <!-- 呼吸浮动包裹组 -->
+              <g id="avatarFloat">
+                <!-- 后层头发 -->
+                <ellipse id="hairBack" class="avatar__hair" cx="160" cy="150" rx="64" ry="66" />
+
+                <!-- 上身卫衣 -->
+                <path
+                  id="body"
+                  class="avatar__hoodie"
+                  d="M96 344c0-64 22-96 64-96s64 32 64 96z"
+                />
+                <path
+                  class="avatar__hoodie-2"
+                  d="M140 300h40a8 8 0 0 1 8 8v16a28 28 0 0 1-56 0v-16a8 8 0 0 1 8-8z"
+                />
+                <!-- 脖子 -->
+                <rect class="avatar__skin" x="148" y="196" width="24" height="30" rx="10" />
+
+                <!-- 左臂（静止，搭在键盘上） -->
+                <path
+                  id="armStatic"
+                  class="avatar__hoodie"
+                  d="M104 300c-16 8-26 26-26 44l22 6c2-16 10-30 22-38z"
+                />
+                <circle class="avatar__skin" cx="100" cy="348" r="12" />
+
+                <!-- 右臂（挥手动画目标） -->
+                <g id="armWave">
+                  <path
+                    class="avatar__hoodie"
+                    d="M214 262c22-6 40-22 48-44l-20-10c-8 16-22 28-40 32z"
+                  />
+                  <circle class="avatar__hand avatar__skin" cx="250" cy="206" r="14" />
+                </g>
+
+                <!-- 头部 -->
+                <g id="head">
+                  <ellipse id="earLeft" class="avatar__skin" cx="106" cy="156" rx="10" ry="14" />
+                  <ellipse id="earRight" class="avatar__skin" cx="214" cy="156" rx="10" ry="14" />
+                  <ellipse id="face" class="avatar__skin" cx="160" cy="152" rx="56" ry="60" />
+
+                  <!-- 腮红 -->
+                  <ellipse id="blushLeft" class="avatar__blush" cx="122" cy="174" rx="12" ry="8" />
+                  <ellipse id="blushRight" class="avatar__blush" cx="198" cy="174" rx="12" ry="8" />
+
+                  <!-- 眉毛 -->
+                  <path id="browLeft" class="avatar__brow" d="M126 132q12 -8 24 0" />
+                  <path id="browRight" class="avatar__brow" d="M170 132q12 -8 24 0" />
+
+                  <!-- 左眼：眼白 + 瞳孔（瞳孔单独位移） -->
+                  <g id="eyeLeft">
+                    <ellipse class="avatar__eye-white" cx="138" cy="152" rx="9" ry="11" />
+                    <circle id="pupilLeft" class="avatar__pupil" cx="138" cy="152" r="5" />
+                  </g>
+                  <!-- 右眼 -->
+                  <g id="eyeRight">
+                    <ellipse class="avatar__eye-white" cx="182" cy="152" rx="9" ry="11" />
+                    <circle id="pupilRight" class="avatar__pupil" cx="182" cy="152" r="5" />
+                  </g>
+
+                  <!-- 微笑嘴 -->
+                  <path id="mouth" class="avatar__mouth" d="M146 180q14 16 28 0" />
+
+                  <!-- 刘海（覆盖额头，绘制在眼睛之后） -->
+                  <path
+                    id="hairFront"
+                    class="avatar__hair"
+                    d="M104 150c-2-40 24-66 56-66s58 26 56 66c-8-20-20-30-34-32-6 14-30 16-38 2-18 4-32 14-40 30z"
+                  />
+                  <!-- 发夹点缀 -->
+                  <rect id="hairClip" class="avatar__clip" x="196" y="118" width="16" height="7" rx="3.5" transform="rotate(24 204 121)" />
+                </g>
+
+                <!-- 笔记本电脑（最前层） -->
+                <g id="laptop">
+                  <path class="avatar__laptop-base" d="M74 372l16-18h140l16 18z" />
+                  <rect class="avatar__laptop-base" x="96" y="306" width="128" height="54" rx="12" />
+                  <rect id="laptopScreen" class="avatar__screen" x="108" y="314" width="104" height="38" rx="7" />
+                </g>
+              </g>
+            </svg>
+          </div>
+
+          <p class="hero__bubble" aria-hidden="true"><code>while True: learn()</code></p>
+        </div>
+
+        <a class="hero__scroll" href="#about" aria-label="向下滚动到关于我">
+          <span class="hero__scroll-icon" data-scroll-icon aria-hidden="true"></span>
+        </a>
       </div>
     </section>
 

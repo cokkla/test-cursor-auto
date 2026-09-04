@@ -54,6 +54,7 @@
     if (typeof initTheme === "function") initTheme();
     renderThemeIcon();
     renderBurgerIcon();
+    renderScrollIcon();
 
     if (typeof renderProfile === "function") renderProfile();
     if (typeof renderSkills === "function") renderSkills();
@@ -88,6 +89,11 @@
   function renderBurgerIcon() {
     var slot = document.querySelector("[data-nav-toggle-icon]");
     if (slot && global.ICONS) slot.innerHTML = global.ICONS.menu;
+  }
+
+  function renderScrollIcon() {
+    var slot = document.querySelector("[data-scroll-icon]");
+    if (slot && global.ICONS) slot.innerHTML = global.ICONS.arrowDown;
   }
 
   /** 页脚版权年份用 JS 写入，避免每年手改 */

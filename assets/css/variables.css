@@ -103,6 +103,7 @@
   --avatar-screen:   #F7F2EC; /* 屏幕 */
   --avatar-blush:    rgba(240, 138, 130, 0.35);
   --avatar-line:     #4A3B36; /* 眉毛、嘴、瞳孔 */
+  --avatar-eye-white:#FFFFFF; /* 眼白 */
 }
 
 /* ==========================================================
@@ -146,4 +147,5 @@ html[data-theme="dark"] {
   --avatar-screen:   #3B343A;
   --avatar-blush:    rgba(245, 160, 152, 0.30);
   --avatar-line:     #3A2E2A;
+  --avatar-eye-white:#F4ECE7;
 }
