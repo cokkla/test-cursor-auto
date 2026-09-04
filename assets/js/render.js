@@ -409,11 +409,139 @@
       .join("");
   }
 
+  /* ---------------- DOM 渲染：经历时间线 ---------------- */
+
+  /** 时间线条目类型对应的图标键：教育用书本、工作用公文包 */
+  function timelineIcon(type) {
+    return type === "edu" ? "book" : "briefcase";
+  }
+
+  function renderTimeline() {
+    var host = document.querySelector("[data-timeline]");
+    if (!host) return;
+
+    var section = host.closest(".section");
+    // 数据为空则整个章节（含标题）不渲染
+    if (typeof timeline === "undefined" || !timeline.length) {
+      if (section) section.hidden = true;
+      return;
+    }
+
+    host.innerHTML = timeline
+      .map(function (item) {
+        var typeLabel = item.type === "edu" ? "教育经历" : "工作经历";
+        var desc = hasValue(item.desc)
+          ? '<p class="timeline-item__desc">' + escapeHtml(item.desc) + "</p>"
+          : "";
+        return (
+          '<article class="timeline-item">' +
+          '<span class="timeline-item__marker" aria-hidden="true">' +
+          icon(timelineIcon(item.type)) +
+          "</span>" +
+          '<div class="timeline-item__content">' +
+          '<span class="timeline-item__type">' +
+          typeLabel +
+          "</span>" +
+          '<p class="timeline-item__period">' +
+          escapeHtml(item.period) +
+          "</p>" +
+          '<h3 class="timeline-item__org">' +
+          escapeHtml(item.org) +
+          "</h3>" +
+          '<p class="timeline-item__role">' +
+          escapeHtml(item.role) +
+          "</p>" +
+          desc +
+          "</div>" +
+          "</article>"
+        );
+      })
+      .join("");
+  }
+
+  /* ---------------- DOM 渲染：联系我 + 页脚 ---------------- */
+
+  function renderContact() {
+    var host = document.querySelector("[data-contact]");
+    if (!host || typeof profile === "undefined") return;
+
+    var cards = "";
+
+    if (hasValue(profile.email)) {
+      cards +=
+        '<a class="contact-card" href="mailto:' +
+        escapeHtml(profile.email) +
+        '">' +
+        '<span class="contact-card__icon" aria-hidden="true">' +
+        icon("mail") +
+        "</span>" +
+        '<span class="contact-card__label">邮箱</span>' +
+        '<span class="contact-card__value">' +
+        escapeHtml(profile.email) +
+        "</span>" +
+        "</a>";
+    }
+
+    if (hasValue(profile.github)) {
+      cards +=
+        '<a class="contact-card" href="' +
+        escapeHtml(profile.github) +
+        '" target="_blank" rel="noopener noreferrer">' +
+        '<span class="contact-card__icon" aria-hidden="true">' +
+        icon("github") +
+        "</span>" +
+        '<span class="contact-card__label">GitHub</span>' +
+        '<span class="contact-card__value">查看主页</span>' +
+        "</a>";
+    }
+
+    // 微信：点击展开二维码。用 <details> 实现，键盘可达且无需 JS
+    if (hasValue(profile.wechatQr)) {
+      cards +=
+        '<details class="contact-card contact-card--wechat">' +
+        '<summary class="contact-card__summary">' +
+        '<span class="contact-card__icon" aria-hidden="true">' +
+        icon("wechat") +
+        "</span>" +
+        '<span class="contact-card__label">微信</span>' +
+        '<span class="contact-card__value">点击展开二维码</span>' +
+        "</summary>" +
+        '<img class="contact-card__qr" src="' +
+        escapeHtml(profile.wechatQr) +
+        '" alt="微信二维码" loading="lazy" decoding="async" width="180" height="180" ' +
+        "onerror=\"this.closest('details').remove()\" />" +
+        "</details>";
+    }
+
+    host.innerHTML =
+      '<p class="contact__intro">欢迎聊聊 AI、项目或工作机会 👋</p>' +
+      '<div class="contact__cards">' +
+      cards +
+      "</div>";
+  }
+
+  function renderFooter() {
+    var host = document.querySelector("[data-footer]");
+    if (!host) return;
+    var name =
+      typeof profile !== "undefined" && hasValue(profile.name)
+        ? profile.name
+        : "";
+    host.innerHTML =
+      '<p class="site-footer__copy">© <span data-footer-year></span> ' +
+      escapeHtml(name) +
+      "</p>" +
+      '<p class="site-footer__note">本站为纯手写 HTML / CSS / JavaScript，无框架依赖</p>';
+  }
+
   /* ---------------- 导出 ---------------- */
 
   global.renderProfile = renderProfile;
   global.renderSkills = renderSkills;
   global.renderProjects = renderProjects;
+  global.renderTimeline = renderTimeline;
+  global.renderContact = renderContact;
+  global.renderFooter = renderFooter;
 
   // 纯工具函数挂命名空间，供其它模块与测试引用
   global.RenderUtils = {
@@ -422,6 +550,7 @@
     skillDots: skillDots,
     clampTags: clampTags,
     matchesCategory: matchesCategory,
+    timelineIcon: timelineIcon,
   };
 
   if (typeof module !== "undefined" && module.exports) {

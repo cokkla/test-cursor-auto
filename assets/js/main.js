@@ -14,8 +14,10 @@
     if (typeof renderProjects === "function") renderProjects();
     if (typeof renderTimeline === "function") renderTimeline();
     if (typeof renderContact === "function") renderContact();
+    if (typeof renderFooter === "function") renderFooter();
     if (typeof initCharacter === "function") initCharacter();
 
+    // 页脚年份需在 renderFooter 生成 [data-footer-year] 之后写入
     setFooterYear();
   }
 

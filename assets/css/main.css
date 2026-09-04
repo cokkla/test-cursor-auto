@@ -740,3 +740,209 @@ a.info-card__value:hover {
   width: 16px;
   height: 16px;
 }
+
+/* ==========================================================
+ * 经历时间线
+ * ========================================================== */
+.timeline {
+  position: relative;
+  max-width: 760px;
+  margin-inline: auto;
+  padding-left: var(--space-7);
+}
+
+/* 左侧竖线 */
+.timeline::before {
+  content: "";
+  position: absolute;
+  top: var(--space-2);
+  bottom: var(--space-2);
+  left: 10px;
+  width: 2px;
+  background-color: var(--color-border);
+}
+
+.timeline-item {
+  position: relative;
+  padding-bottom: var(--space-6);
+}
+
+.timeline-item:last-child {
+  padding-bottom: 0;
+}
+
+/* 竖线上的圆点标记 + 同色光晕 */
+.timeline-item__marker {
+  position: absolute;
+  left: calc(-1 * var(--space-7) + 1px);
+  top: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-primary);
+  color: var(--color-text-inverse);
+  box-shadow: 0 0 0 5px var(--color-primary-soft);
+}
+
+.timeline-item__marker svg {
+  width: 13px;
+  height: 13px;
+}
+
+.timeline-item__content {
+  padding: var(--space-5);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background-color: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+}
+
+.timeline-item__type {
+  display: inline-block;
+  margin-bottom: var(--space-2);
+  padding: 2px var(--space-3);
+  border-radius: var(--radius-full);
+  background-color: var(--color-accent-soft);
+  color: var(--color-accent-ink);
+  font-size: var(--fs-xs);
+}
+
+.timeline-item__period {
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  color: var(--color-primary-ink);
+}
+
+.timeline-item__org {
+  margin-top: var(--space-1);
+  font-size: var(--fs-h3);
+}
+
+.timeline-item__role {
+  margin-top: var(--space-1);
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+}
+
+.timeline-item__desc {
+  margin-top: var(--space-3);
+  font-size: var(--fs-sm);
+}
+
+/* ==========================================================
+ * 联系我
+ * ========================================================== */
+.contact__intro {
+  margin-bottom: var(--space-7);
+  text-align: center;
+  font-size: var(--fs-h3);
+  color: var(--color-text);
+}
+
+.contact__cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-5);
+}
+
+.contact-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  width: 240px;
+  padding: var(--space-6);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background-color: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+  transition: transform var(--duration-fast) var(--ease),
+    box-shadow var(--duration-fast) var(--ease);
+}
+
+.contact-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.contact-card__summary {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  list-style: none;
+  cursor: pointer;
+}
+
+.contact-card__summary::-webkit-details-marker {
+  display: none;
+}
+
+.contact-card__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-primary-soft);
+  color: var(--color-primary-ink);
+}
+
+.contact-card__icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.contact-card__label {
+  font-weight: var(--font-weight-medium);
+}
+
+.contact-card__value {
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+  word-break: break-word;
+}
+
+.contact-card--wechat {
+  cursor: pointer;
+}
+
+.contact-card__qr {
+  width: 180px;
+  height: 180px;
+  margin: var(--space-4) auto 0;
+  border-radius: var(--radius-md);
+}
+
+/* ==========================================================
+ * 页脚
+ * ========================================================== */
+.site-footer {
+  padding-block: var(--space-7);
+  border-top: 1px solid var(--color-border);
+  background-color: var(--color-bg-alt);
+}
+
+.site-footer__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  text-align: center;
+}
+
+.site-footer__copy {
+  font-size: var(--fs-sm);
+  color: var(--color-text);
+}
+
+.site-footer__note {
+  font-size: var(--fs-xs);
+  color: var(--color-text-muted);
+}
