@@ -171,7 +171,14 @@ button {
   transform: translateX(-50%);
 }
 
-.site-nav__theme {
+.site-nav__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.site-nav__theme,
+.site-nav__burger {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -183,6 +190,22 @@ button {
   color: var(--color-primary-ink);
   transition: background-color var(--duration-fast) var(--ease),
     transform var(--duration-fast) var(--ease);
+}
+
+/* 汉堡按钮默认隐藏，仅移动端出现（响应式在模块 8 定义显示） */
+.site-nav__burger {
+  display: none;
+}
+
+.site-nav__burger-icon {
+  display: inline-flex;
+  width: 20px;
+  height: 20px;
+}
+
+.site-nav__burger-icon svg {
+  width: 100%;
+  height: 100%;
 }
 
 .site-nav__theme:hover {

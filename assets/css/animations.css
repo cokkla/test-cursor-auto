@@ -2,6 +2,19 @@
  * animations.css —— 关键帧动画与滚动进场（模块 7 填充）
  * ========================================================== */
 
+/* --- 章节滚动进场：初始隐藏态由 JS 添加，保证无 JS 时内容可见 --- */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity var(--duration-normal) var(--ease),
+    transform var(--duration-normal) var(--ease);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
 /* 尊重用户的“减少动效”偏好：全局兜底关闭动画与平滑滚动 */
 @media (prefers-reduced-motion: reduce) {
   *,
